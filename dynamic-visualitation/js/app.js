@@ -25,8 +25,6 @@ console.log(rect)
 //Enter function
 const canvas2 = d3.select(".canvas2")
 
-let dataArray2 = [4, 15, 34, 64, 5, 31, 1.5, 15]
-
 let dataObjArr = [
     {
         height: 4,
@@ -57,7 +55,7 @@ let dataObjArr = [
 
 const svg2 = canvas2.append("svg")
                     .attr("width", 600)
-                    .attr("height", 300)
+                    .attr("height", 200)
 
 const rect2 = svg2.selectAll("rect")
 
@@ -74,7 +72,44 @@ rect2.data(dataObjArr)
         
     })
     .attr("y", (d, i) => {
-        return 300 - d.height*2
+        return 200 - d.height*2
     })
 
 console.log(rect)
+
+
+//Parsing local and remote JSON
+const canvas3 = d3.select(".canvas3")
+
+const svg3 = canvas3.append("svg")
+                    .attr("width", 600)
+                    .attr("height", 300)
+
+const rect3 = svg3.selectAll("rect")
+
+d3.json('text.json')
+    .then(data => {
+        console.log(data)
+        drawSvgs(data)
+    })
+
+const drawSvgs = (data) =>{
+    rect3.data(data)
+    .enter().append("rect")
+    .attr("fill", (d) => d.fill)
+    .attr("width", (d) => d.width)
+    .attr("height", (d) => {
+        console.log(d)
+        return d.height*2
+    })
+    .attr("x", (d, i) => {
+        return i * (d.width + 1)
+        
+    })
+    .attr("y", (d, i) => {
+        return 300 - d.height*2
+    })
+  }  
+
+
+
