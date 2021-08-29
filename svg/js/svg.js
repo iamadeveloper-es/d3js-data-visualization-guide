@@ -29,3 +29,13 @@ const line = svg.append("line")
                 .attr("y2", 100)
                 .attr("stroke-width", 2)
                 .attr("stroke", "black")
+
+//text
+const text = svg.append("text")
+                .text("hello")
+                .attr("fill", "white")
+                .attr("font-size", "24px")
+                .attr("font-family", "Arial")
+                //.attr("text-anchor", "middle")
+                .attr("x", (100/2))
+                .attr("y", (100/2))
