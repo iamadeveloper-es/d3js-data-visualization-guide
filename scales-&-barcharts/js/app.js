@@ -49,18 +49,28 @@ const drawRect = (data) => {
                 .paddingInner(0.1)
                 .paddingOuter(0.3)
 
+    const xAxis = d3.axisBottom(x)
+    const yAxis = d3.axisLeft(y)
+
+    xAxisGroup.call(xAxis)
+    yAxisGroup.call(yAxis)
+
     rect.data(data)
         .enter().append('rect')
+        .transition()
+            .attr('y', d => y(d.height))
+            .delay(function(d, i){
+                return i * 100
+            }) 
+            .ease(d3.easeBounceOut)
+           
         .attr('width', x.bandwidth)
         .attr('height', (d, i) => graphHeight - y(d.height))
         .attr('fill', (d, i) => d.fill)
         .attr('x', (d, i) => x(d.fill))
         .attr('y', d => y(d.height))
 
-    const xAxis = d3.axisBottom(x)
-    const yAxis = d3.axisLeft(y)
-
-    xAxisGroup.call(xAxis)
-    yAxisGroup.call(yAxis)
+    
 }
+
 
